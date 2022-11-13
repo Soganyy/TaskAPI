@@ -53,13 +53,9 @@ input{
     height: 102px;
     border: 1px solid #E5E5E5;
     border-radius: 3px;
+    padding-left: 13px;
+    text-align: justify;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
 }
-::placeholder { 
-    position: absolute;
-    left: 13px;
-    top: 77px;
-    color: #C6C6C6;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-  }
