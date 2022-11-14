@@ -103,7 +103,7 @@ function firstChange() {
     function valueSet() {
         sInput.value = fInput.value * firstSectionCurrency;
     }
-    setTimeout(valueSet, 100)
+    setTimeout(valueSet, 1000)
 }
 
 function secondChange() {
@@ -133,5 +133,5 @@ function secondChange() {
     function valueSet() {
         fInput.value = sInput.value * secondSectionCurrency;
     }
-    setTimeout(valueSet, 100)
+    setTimeout(valueSet, 1000)
 }
