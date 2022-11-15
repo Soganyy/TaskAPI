@@ -137,6 +137,9 @@ ssFourthBtn.addEventListener('click', () => {
 const fInput = document.querySelector('.firstInput')
 const sInput = document.querySelector('.secondInput')
 
+fetchingData1();
+fetchingData2();
+
 function firstChange() {
     sInput.value = fInput.value * firstSectionCurrency;
 }
