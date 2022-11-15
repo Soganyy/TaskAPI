@@ -4,50 +4,53 @@ let firstBtnText = "";
 let secondBtnText = "";
 let fs = 1;
 let ss = 2;
+const firstExchg = document.querySelector('.firstExchange');
+const secondExchg = document.querySelector('.secondExchange');
 
-function change() {
-    switch(fs){
-        case 1: firstBtnText = 'RUB'
-        break;
-        case 2: firstBtnText = 'USD'
-        break;
-        case 3: firstBtnText = 'EUR'
-        break;
-        case 4: firstBtnText = 'GBP'
-    }
-    switch(ss){
-        case 1: secondBtnText = 'RUB'
-        break;
-        case 2: secondBtnText = 'USD'
-        break;
-        case 3: secondBtnText = 'EUR'
-        break;
-        case 4: secondBtnText = 'GBP'
-    }
-}
+function fetching() {
+    firstBtnText = fs = 1 ? 'RUB' : fs = 2 ? "USD" : fs = 3 ? "EUR" : "GBP";
+    secondBtnText = ss = 1 ? 'RUB' : ss = 2 ? "USD" : ss = 3 ? "EUR" : "GBP";
 
-function fetchingData1() {
     fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
     .then(res => res.json())
     .then(data => {
         firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
     })
-    function valueSet1() {
-        sInput.value = fInput.value * firstSectionCurrency;
-    }
-    setTimeout(valueSet1, 1000)
-}
 
-function fetchingData2() {
     fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
     .then(res => res.json())
     .then(data => {
         secondSectionCurrency = data.rates[Object.keys(data.rates)[0]];
     })
-    function valueSet2() {
-        fInput.value = sInput.value * secondSectionCurrency;
-    }
-    setTimeout(valueSet2, 1000)
+}
+
+function valueSet1() {
+    sInput.value = fInput.value * firstSectionCurrency;
+    firstExchg.innerHTML = firstSectionCurrency;
+    secondExchg.innerHTML = secondSectionCurrency;
+}
+function valueSet2() {
+    fInput.value = sInput.value * secondSectionCurrency;
+    firstExchg.innerHTML = firstSectionCurrency;
+    secondExchg.innerHTML = secondSectionCurrency;
+}
+
+function fetchingData1() {
+    fetching();
+    setTimeout(valueSet1, 500)
+}
+
+function fetchingData2() {
+    fetching();
+    setTimeout(valueSet2, 500)
+}
+
+function firstChange() {
+    sInput.value = fInput.value * firstSectionCurrency;
+}
+
+function secondChange() {
+    fInput.value = sInput.value * secondSectionCurrency;
 }
 
 const fsFirstBtn = document.querySelector('.firstRub');
@@ -61,7 +64,6 @@ fsFirstBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    change();
     fetchingData1();
 })
 fsSecondBtn.addEventListener('click', () => {
@@ -70,7 +72,6 @@ fsSecondBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: #833AE0;" + "color: white;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
-    change();
     fetchingData1();
 })
 fsThirdBtn.addEventListener('click', () => {
@@ -79,7 +80,6 @@ fsThirdBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: #833AE0;" + "color: white;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    change();
     fetchingData1();
 })
 fsFourthBtn.addEventListener('click', () => {
@@ -88,7 +88,6 @@ fsFourthBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: #833AE0;" + "color: white;";
-    change();
     fetchingData1();
 })
 
@@ -103,7 +102,6 @@ ssFirstBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    change();
     fetchingData2();
 })
 ssSecondBtn.addEventListener('click', () => {
@@ -112,7 +110,6 @@ ssSecondBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: #833AE0;" + "color: white;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
-    change();
     fetchingData2();
 })
 ssThirdBtn.addEventListener('click', () => {
@@ -121,7 +118,6 @@ ssThirdBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: #833AE0;" + "color: white;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    change();
     fetchingData2();
 })
 ssFourthBtn.addEventListener('click', () => {
@@ -130,7 +126,6 @@ ssFourthBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: #833AE0;" + "color: white;";
-    change();
     fetchingData2();
 })
 
@@ -139,11 +134,3 @@ const sInput = document.querySelector('.secondInput')
 
 fetchingData1();
 fetchingData2();
-
-function firstChange() {
-    sInput.value = fInput.value * firstSectionCurrency;
-}
-
-function secondChange() {
-    fInput.value = sInput.value * secondSectionCurrency;
-}

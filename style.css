@@ -67,3 +67,19 @@ input{
     background: #833AE0;
     color: white;
 }
+.firstExchange{
+    margin-top: 10px;
+    margin-left: 5px;
+    color: #C6C6C6;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+.secondExchange{
+    margin-top: 10px;
+    margin-left: 5px;
+    color: #C6C6C6;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
