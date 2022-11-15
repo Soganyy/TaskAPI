@@ -2,8 +2,53 @@ let firstSectionCurrency = 0;
 let secondSectionCurrency = 0;
 let firstBtnText = "";
 let secondBtnText = "";
-let fs = 0;
-let ss = 0;
+let fs = 1;
+let ss = 2;
+
+function change() {
+    switch(fs){
+        case 1: firstBtnText = 'RUB'
+        break;
+        case 2: firstBtnText = 'USD'
+        break;
+        case 3: firstBtnText = 'EUR'
+        break;
+        case 4: firstBtnText = 'GBP'
+    }
+    switch(ss){
+        case 1: secondBtnText = 'RUB'
+        break;
+        case 2: secondBtnText = 'USD'
+        break;
+        case 3: secondBtnText = 'EUR'
+        break;
+        case 4: secondBtnText = 'GBP'
+    }
+}
+
+function fetchingData1() {
+    fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
+    .then(res => res.json())
+    .then(data => {
+        firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
+    })
+    function valueSet1() {
+        sInput.value = fInput.value * firstSectionCurrency;
+    }
+    setTimeout(valueSet1, 1000)
+}
+
+function fetchingData2() {
+    fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
+    .then(res => res.json())
+    .then(data => {
+        secondSectionCurrency = data.rates[Object.keys(data.rates)[0]];
+    })
+    function valueSet2() {
+        fInput.value = sInput.value * secondSectionCurrency;
+    }
+    setTimeout(valueSet2, 1000)
+}
 
 const fsFirstBtn = document.querySelector('.firstRub');
 const fsSecondBtn = document.querySelector('.firstUsd');
@@ -16,6 +61,8 @@ fsFirstBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
+    change();
+    fetchingData1();
 })
 fsSecondBtn.addEventListener('click', () => {
     fs = 2;
@@ -23,6 +70,8 @@ fsSecondBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: #833AE0;" + "color: white;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
+    change();
+    fetchingData1();
 })
 fsThirdBtn.addEventListener('click', () => {
     fs = 3
@@ -30,6 +79,8 @@ fsThirdBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: #833AE0;" + "color: white;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
+    change();
+    fetchingData1();
 })
 fsFourthBtn.addEventListener('click', () => {
     fs = 4
@@ -37,6 +88,8 @@ fsFourthBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: #833AE0;" + "color: white;";
+    change();
+    fetchingData1();
 })
 
 const ssFirstBtn = document.querySelector('.secondRub');
@@ -50,6 +103,8 @@ ssFirstBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
+    change();
+    fetchingData2();
 })
 ssSecondBtn.addEventListener('click', () => {
     ss = 2;
@@ -57,6 +112,8 @@ ssSecondBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: #833AE0;" + "color: white;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
+    change();
+    fetchingData2();
 })
 ssThirdBtn.addEventListener('click', () => {
     ss = 3;
@@ -64,6 +121,8 @@ ssThirdBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: #833AE0;" + "color: white;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
+    change();
+    fetchingData2();
 })
 ssFourthBtn.addEventListener('click', () => {
     ss = 4;
@@ -71,67 +130,17 @@ ssFourthBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: #833AE0;" + "color: white;";
+    change();
+    fetchingData2();
 })
 
 const fInput = document.querySelector('.firstInput')
 const sInput = document.querySelector('.secondInput')
 
 function firstChange() {
-    switch(fs){
-        case 1: firstBtnText = 'RUB'
-        break;
-        case 2: firstBtnText = 'USD'
-        break;
-        case 3: firstBtnText = 'EUR'
-        break;
-        case 4: firstBtnText = 'GBP'
-    }
-    switch(ss){
-        case 1: secondBtnText = 'RUB'
-        break;
-        case 2: secondBtnText = 'USD'
-        break;
-        case 3: secondBtnText = 'EUR'
-        break;
-        case 4: secondBtnText = 'GBP'
-    }
-    fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
-    .then(res => res.json())
-    .then(data => {
-        firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
-    })
-    function valueSet() {
-        sInput.value = fInput.value * firstSectionCurrency;
-    }
-    setTimeout(valueSet, 1000)
+    sInput.value = fInput.value * firstSectionCurrency;
 }
 
 function secondChange() {
-    switch(fs){
-        case 1: firstBtnText = 'RUB'
-        break;
-        case 2: firstBtnText = 'USD'
-        break;
-        case 3: firstBtnText = 'EUR'
-        break;
-        case 4: firstBtnText = 'GBP'
-    }
-    switch(ss){
-        case 1: secondBtnText = 'RUB'
-        break;
-        case 2: secondBtnText = 'USD'
-        break;
-        case 3: secondBtnText = 'EUR'
-        break;
-        case 4: secondBtnText = 'GBP'
-    }
-    fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
-    .then(res => res.json())
-    .then(data => {
-        secondSectionCurrency = data.rates[Object.keys(data.rates)[0]];
-    })
-    function valueSet() {
-        fInput.value = sInput.value * secondSectionCurrency;
-    }
-    setTimeout(valueSet, 1000)
+    fInput.value = sInput.value * secondSectionCurrency;
 }
