@@ -1,9 +1,12 @@
+// Declaring Variables
 let firstSectionCurrency = 0;
 let secondSectionCurrency = 0;
 let firstBtnText = "";
 let secondBtnText = "";
 let fs = 1;
 let ss = 2;
+
+// DOM elements
 const firstExchg = document.querySelector('.firstExchange');
 const secondExchg = document.querySelector('.secondExchange');
 const fInput = document.querySelector('.firstInput')
@@ -17,6 +20,7 @@ const ssSecondBtn = document.querySelector('.secondUsd');
 const ssThirdBtn = document.querySelector('.secondEur');
 const ssFourthBtn = document.querySelector('.secondGbp');
 
+// Function for checking selected buttons and fetching data
 function fetching() {
     firstBtnText = fs = 1 ? 'RUB' : fs = 2 ? "USD" : fs = 3 ? "EUR" : "GBP";
     secondBtnText = ss = 1 ? 'RUB' : ss = 2 ? "USD" : ss = 3 ? "EUR" : "GBP";
@@ -34,6 +38,7 @@ function fetching() {
     })
 }
 
+// Functions for changing value of inputs and axchange information with delay after fetch
 function valueSet1() {
     sInput.value = fInput.value * firstSectionCurrency;
     firstExchg.innerHTML = firstSectionCurrency;
@@ -45,24 +50,25 @@ function valueSet2() {
     secondExchg.innerHTML = secondSectionCurrency;
 }
 
+// Functions for combining fetching and calling value change functions
 function fetchingData1() {
     fetching();
     setTimeout(valueSet1, 500)
 }
-
 function fetchingData2() {
     fetching();
     setTimeout(valueSet2, 500)
 }
 
+// Function for onclick that changes values on button click
 function firstChange() {
     sInput.value = fInput.value * firstSectionCurrency;
 }
-
 function secondChange() {
     fInput.value = sInput.value * secondSectionCurrency;
 }
 
+// Styling and changing values on button click
 fsFirstBtn.addEventListener('click', () => {
     fs = 1
     fsFirstBtn.style = "background: #833AE0;" + "color: white;";
@@ -95,7 +101,6 @@ fsFourthBtn.addEventListener('click', () => {
     fsFourthBtn.style = "background: #833AE0;" + "color: white;";
     fetchingData1();
 })
-
 ssFirstBtn.addEventListener('click', () => {
     ss = 1;
     ssFirstBtn.style = "background: #833AE0;" + "color: white;";
@@ -129,5 +134,6 @@ ssFourthBtn.addEventListener('click', () => {
     fetchingData2();
 })
 
+// Setting values on first run of Program
 fetchingData1();
 fetchingData2();
