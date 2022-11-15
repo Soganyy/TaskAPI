@@ -6,6 +6,16 @@ let fs = 1;
 let ss = 2;
 const firstExchg = document.querySelector('.firstExchange');
 const secondExchg = document.querySelector('.secondExchange');
+const fInput = document.querySelector('.firstInput')
+const sInput = document.querySelector('.secondInput')
+const fsFirstBtn = document.querySelector('.firstRub');
+const fsSecondBtn = document.querySelector('.firstUsd');
+const fsThirdBtn = document.querySelector('.firstEur');
+const fsFourthBtn = document.querySelector('.firstGbp');
+const ssFirstBtn = document.querySelector('.secondRub');
+const ssSecondBtn = document.querySelector('.secondUsd');
+const ssThirdBtn = document.querySelector('.secondEur');
+const ssFourthBtn = document.querySelector('.secondGbp');
 
 function fetching() {
     firstBtnText = fs = 1 ? 'RUB' : fs = 2 ? "USD" : fs = 3 ? "EUR" : "GBP";
@@ -53,11 +63,6 @@ function secondChange() {
     fInput.value = sInput.value * secondSectionCurrency;
 }
 
-const fsFirstBtn = document.querySelector('.firstRub');
-const fsSecondBtn = document.querySelector('.firstUsd');
-const fsThirdBtn = document.querySelector('.firstEur');
-const fsFourthBtn = document.querySelector('.firstGbp');
-
 fsFirstBtn.addEventListener('click', () => {
     fs = 1
     fsFirstBtn.style = "background: #833AE0;" + "color: white;";
@@ -91,11 +96,6 @@ fsFourthBtn.addEventListener('click', () => {
     fetchingData1();
 })
 
-const ssFirstBtn = document.querySelector('.secondRub');
-const ssSecondBtn = document.querySelector('.secondUsd');
-const ssThirdBtn = document.querySelector('.secondEur');
-const ssFourthBtn = document.querySelector('.secondGbp');
-
 ssFirstBtn.addEventListener('click', () => {
     ss = 1;
     ssFirstBtn.style = "background: #833AE0;" + "color: white;";
@@ -128,9 +128,6 @@ ssFourthBtn.addEventListener('click', () => {
     ssFourthBtn.style = "background: #833AE0;" + "color: white;";
     fetchingData2();
 })
-
-const fInput = document.querySelector('.firstInput')
-const sInput = document.querySelector('.secondInput')
 
 fetchingData1();
 fetchingData2();
