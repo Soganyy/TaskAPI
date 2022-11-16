@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Task API</title>
-</head>
-<body>
-    <div class="main">
-        <h1>Online Currency Converter</h1>
-        <div class="divHoldsTwoSections">
-            <div class="InputDiv">
-                <h4>Input value</h4>
-                <div class="buttons">
-                    <button class="firstRub" onclick="click">RUB</button>
-                    <button class="firstUsd" onclick="click">USD</button>
-                    <button class="firstEur" onclick="click">EUR</button>
-                    <button class="firstGbp" onclick="click">GBP</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Task API</title>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Online Currency Converter</h1>
+            <div class="divHoldsTwoSections">
+                <div class="InputDiv">
+                    <h4>Input value</h4>
+                    <div class="buttons">
+                        <button class="firstRub" onclick="click">RUB</button>
+                        <button class="firstUsd" onclick="click">USD</button>
+                        <button class="firstEur" onclick="click">EUR</button>
+                        <button class="firstGbp" onclick="click">GBP</button>
+                    </div>
+                    <input type="text" value="0" oninput="firstChange()" class="firstInput">
+                    <div class="firstExchange">Exchange</div>
                 </div>
-                <input type="text" value="0" oninput="firstChange()" class="firstInput">
-                <div class="firstExchange">Exchange</div>
-            </div>
-            <div class="exchangeDiv">
-                <h4>Exchanged Value</h4>
-                <div class="buttons">
-                    <button class="secondRub" onclick="click">RUB</button>
-                    <button class="secondUsd" onclick="click">USD</button>
-                    <button class="secondEur" onclick="click">EUR</button>
-                    <button class="secondGbp" onclick="click">GBP</button>
+                <div class="exchangeDiv">
+                    <h4>Exchanged Value</h4>
+                    <div class="buttons">
+                        <button class="secondRub" onclick="click">RUB</button>
+                        <button class="secondUsd" onclick="click">USD</button>
+                        <button class="secondEur" onclick="click">EUR</button>
+                        <button class="secondGbp" onclick="click">GBP</button>
+                    </div>
+                    <input type="text" value="0" oninput="secondChange()" class="secondInput">
+                    <div class="secondExchange">Exchange</div>
                 </div>
-                <input type="text" value="0" oninput="secondChange()" class="secondInput">
-                <div class="secondExchange">Exchange</div>
             </div>
         </div>
-    </div>
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
