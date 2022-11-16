@@ -22,13 +22,16 @@ const ssFourthBtn = document.querySelector('.secondGbp');
 
 // Function for checking selected buttons and fetching data
 function fetching() {
-    firstBtnText = fs = 1 ? 'RUB' : fs = 2 ? "USD" : fs = 3 ? "EUR" : "GBP";
-    secondBtnText = ss = 1 ? 'RUB' : ss = 2 ? "USD" : ss = 3 ? "EUR" : "GBP";
+    firstBtnText = fs == 1 ? 'RUB' : fs == 2 ? "USD" : fs == 3 ? "EUR" : "GBP";
+    console.log(firstBtnText)
+    secondBtnText = ss == 1 ? 'RUB' : ss == 2 ? "USD" : ss == 3 ? "EUR" : "GBP";
+    console.log(secondBtnText)
 
     fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
     .then(res => res.json())
     .then(data => {
         firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
+        console.log(firstSectionCurrency)
     })
 
     fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
@@ -60,7 +63,7 @@ function fetchingData2() {
     setTimeout(valueSet2, 500)
 }
 
-// Function for onclick that changes values on button click
+// Function for onInput that changes values on change of input value
 function firstChange() {
     sInput.value = fInput.value * firstSectionCurrency;
 }
