@@ -20,47 +20,33 @@ const ssSecondBtn = document.querySelector('.secondUsd');
 const ssThirdBtn = document.querySelector('.secondEur');
 const ssFourthBtn = document.querySelector('.secondGbp');
 
-// Function for checking selected buttons and fetching data
-function fetching() {
+// Function for checking selected buttons,fetching data and changing currency
+const fetchProg1 = async () => {
     firstBtnText = fs == 1 ? 'RUB' : fs == 2 ? "USD" : fs == 3 ? "EUR" : "GBP";
-    console.log(firstBtnText)
     secondBtnText = ss == 1 ? 'RUB' : ss == 2 ? "USD" : ss == 3 ? "EUR" : "GBP";
-    console.log(secondBtnText)
 
-    fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
-    .then(res => res.json())
-    .then(data => {
-        firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
-        console.log(firstSectionCurrency)
-    })
+    const res = await fetch(`https://api.exchangerate.host/latest?base=${firstBtnText}&symbols=${secondBtnText}`)
+    const data = await res.json();
+    firstSectionCurrency = data.rates[Object.keys(data.rates)[0]];
+    console.log(data.rates[Object.keys(data.rates)[0]])
 
-    fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
-    .then(res => res.json())
-    .then(data => {
-        secondSectionCurrency = data.rates[Object.keys(data.rates)[0]];
-    })
-}
-
-// Functions for changing value of inputs and axchange information with delay after fetch
-function valueSet1() {
     sInput.value = fInput.value * firstSectionCurrency;
     firstExchg.innerHTML = firstSectionCurrency;
     secondExchg.innerHTML = secondSectionCurrency;
 }
-function valueSet2() {
+
+const fetchProg2 = async () => {
+    firstBtnText = fs == 1 ? 'RUB' : fs == 2 ? "USD" : fs == 3 ? "EUR" : "GBP";
+    secondBtnText = ss == 1 ? 'RUB' : ss == 2 ? "USD" : ss == 3 ? "EUR" : "GBP";
+
+    const res = await fetch(`https://api.exchangerate.host/latest?base=${secondBtnText}&symbols=${firstBtnText}`)
+    const data = await res.json();
+    secondSectionCurrency = data.rates[Object.keys(data.rates)[0]];
+    console.log(data)
+
     fInput.value = sInput.value * secondSectionCurrency;
     firstExchg.innerHTML = firstSectionCurrency;
     secondExchg.innerHTML = secondSectionCurrency;
-}
-
-// Functions for combining fetching and calling value change functions
-function fetchingData1() {
-    fetching();
-    setTimeout(valueSet1, 500)
-}
-function fetchingData2() {
-    fetching();
-    setTimeout(valueSet2, 500)
 }
 
 // Function for onInput that changes values on change of input value
@@ -78,7 +64,7 @@ fsFirstBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    fetchingData1();
+    fetchProg1();
 })
 fsSecondBtn.addEventListener('click', () => {
     fs = 2;
@@ -86,7 +72,7 @@ fsSecondBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: #833AE0;" + "color: white;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
-    fetchingData1();
+    fetchProg1();
 })
 fsThirdBtn.addEventListener('click', () => {
     fs = 3
@@ -94,7 +80,7 @@ fsThirdBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: #833AE0;" + "color: white;";
     fsFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    fetchingData1();
+    fetchProg1();
 })
 fsFourthBtn.addEventListener('click', () => {
     fs = 4
@@ -102,7 +88,7 @@ fsFourthBtn.addEventListener('click', () => {
     fsSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     fsThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     fsFourthBtn.style = "background: #833AE0;" + "color: white;";
-    fetchingData1();
+    fetchProg1();
 })
 ssFirstBtn.addEventListener('click', () => {
     ss = 1;
@@ -110,7 +96,7 @@ ssFirstBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    fetchingData2();
+    fetchProg2();
 })
 ssSecondBtn.addEventListener('click', () => {
     ss = 2;
@@ -118,7 +104,7 @@ ssSecondBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: #833AE0;" + "color: white;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;"; 
-    fetchingData2();
+    fetchProg2();
 })
 ssThirdBtn.addEventListener('click', () => {
     ss = 3;
@@ -126,7 +112,7 @@ ssThirdBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: #833AE0;" + "color: white;";
     ssFourthBtn.style = "background: white;" + "color: #9F9F9F;";
-    fetchingData2();
+    fetchProg2();
 })
 ssFourthBtn.addEventListener('click', () => {
     ss = 4;
@@ -134,9 +120,9 @@ ssFourthBtn.addEventListener('click', () => {
     ssSecondBtn.style = "background: white;" + "color: #9F9F9F;";
     ssThirdBtn.style = "background: white;" + "color: #9F9F9F;";
     ssFourthBtn.style = "background: #833AE0;" + "color: white;";
-    fetchingData2();
+    fetchProg2();
 })
 
 // Setting values on first run of Program
-fetchingData1();
-fetchingData2();
+fetchProg1();
+fetchProg2();
